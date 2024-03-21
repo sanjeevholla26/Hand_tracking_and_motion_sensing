@@ -1,0 +1,193 @@
+{% extends './header_layout.html' %}
+{% load static %}
+{% block title %} Mouse Action {% endblock %}
+{% block body %}
+    <div class="mouse-action-container">
+        <div class="title">
+            <h1>{{mouse_action.name}}</h1>
+        </div>
+        <div class="mouse-action-body">
+            <div class="mouse-action-body-content left">
+                <h2>Description</h2>
+                <p>{{mouse_action.description}}</p>
+            </div>
+            <div class="mouse-action-body-content right">
+                <h2>Select Gesture</h2>
+                <form action="{% url 'mappings' id=mouse_action.id %}" method="post" class="mapping-form">
+                    {% csrf_token %}
+                    {% for gesture in mouse_action.gesture_category.all %}
+                        {% if mapping.category.id == gesture.id %}
+                            <input type="radio" name="gesture" value="{{gesture.id}}" id="{{gesture.id}}" checked>
+                        {% elif gesture.id in user_selected_gestures %}
+                            <input type="radio" name="gesture" value="{{gesture.id}}" id="{{gesture.id}}" disabled>
+                        {% else %}
+                            <input type="radio" name="gesture" value="{{gesture.id}}" id="{{gesture.id}}" >
+                        {% endif %}
+
+                        <label for="{{gesture.id}}">
+                            {{gesture.name}}
+                        </label>
+
+                    {% endfor %}
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="gesture-info-container">
+            <h5>Gestures Info</h5>
+            {% for gesture in mouse_action.gesture_category.all %}
+            <a href="#" class="gesture-info-link">
+                <div class="each-gesture-cont">
+                    <img src={{gesture.image_url}}><div class="each-gesture"><h3>{{gesture.name}}</h3></div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    <style>
+        .gesture-info-link{
+            text-decoration: none;
+        }
+        .gesture-info-link:hover{
+            text-decoration: none;
+        }
+        .gesture-info-container{
+            max-width: 1200px;
+            background-color: white;
+            margin-top: 20px;
+            padding: 30px;
+            border-radius: 10px;
+            filter: drop-shadow(0 0 5px rgb(218, 218, 218));
+        }
+        .gesture-info-container>h5{
+            font-size: 20px;
+            color: gray;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        body{
+            background-color: rgb(245, 247, 247);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        .mouse-action-container{
+            max-width: 1200px;
+            margin: auto;
+        }
+        .title{
+            max-width: 1200px;
+            background-color: rgb(255, 255, 255);
+            padding: 20px;
+            border-radius: 15px;
+            filter: drop-shadow(0 0 5px rgb(240, 240, 240));
+            margin-top: 20px;
+            border: solid 1px;
+        }
+        .title>h1{
+            font-family: system-ui;
+            font-size: 35px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        .mouse-action-body{
+            display: flex;
+            margin-top: 20px;
+            gap: 1rem;
+        }
+        .mouse-action-body-content{
+            padding: 20px;
+            background-color: rgb(255, 255, 255);
+            border-radius: 10px;
+            filter: drop-shadow(0 0 5px rgb(240, 240, 240));
+        }
+
+        .left{
+            width: 650px;
+            background-color: rgb(244, 244, 145);
+        }
+        .right{
+            width: 530px;
+        }
+        .left>h2{
+            font-weight: 700;
+            font-size: 30px;
+            letter-spacing: 1.5px;
+            color: rgb(32, 69, 164);;
+            padding-bottom: 10px;
+            border-bottom: solid 3px black;
+            margin-bottom: 40px;
+        }
+        .left>p{
+            font-size: 25px;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .mapping-form{
+            display: grid;
+            gap: 10px;
+        }
+
+        .mapping-form input[type="radio"] {
+            opacity: 0;
+            position: fixed;
+            width: 0;
+        }
+
+        .mapping-form  label{
+            display: block;
+            padding: 10px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .mapping-form input[type="radio"]:checked + label {
+            background-color:#bfb;
+            border-color: #4c4;
+        }
+        .mapping-form input[type="radio"]:disabled + label {
+            background-color:rgb(172, 172, 172);
+            border-color: rgb(182, 182, 182);
+        }
+        .mapping-form input[type="radio"]:focus + label {
+            background-color:#bfb;
+            border-color: #4c4;
+        }
+        .mapping-form>button{
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            background-color: rgb(55, 112, 255);
+            border: none;
+            font-weight: 600;
+            letter-spacing: 2px;
+            font-size: 20px;
+        }
+        .right>h2{
+            font-weight: 700;
+            font-size: 30px;
+            letter-spacing: 1.5px;
+            color: rgb(32, 69, 164);;
+            padding-bottom: 10px;
+            border-bottom: solid 3px black;
+            margin-bottom: 30px;
+        }
+        .each-gesture-cont{
+            display: flex;
+            padding: 20px;
+            gap: 10px;
+            border: solid 2px black;
+            align-items: center;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .each-gesture-cont>img{
+            width: 100px;
+            border-radius: 10px;
+            padding: 5px;
+            border: solid 2px gray;
+            height: 100px;
+        }
+    </style>
+{% endblock %}

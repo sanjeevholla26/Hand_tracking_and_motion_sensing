@@ -1,0 +1,135 @@
+{% extends './header_layout.html' %}
+{% load static %}
+{% block title %} Actions {% endblock %}
+{% block body %}
+    <div class="all-action-cont">
+        <div class="title">
+            <h1>Computer Actions</h1>
+        </div>
+        <div class="gesture-info-container">
+            <h5>Actions</h5>
+            <p>Here is the list of actions. The one's that have a green border means you have already mapped a gesture for that action.</p>
+            {% for action in actions %}
+                <a href="{% url 'mappings' id=action.id %}" class="gesture-info-link">
+                    {% if action.id in actions_mapped %}
+                        <div class="each-gesture-cont mapped">
+                    {% else %}
+                        <div class="each-gesture-cont">
+                    {% endif %}
+                        <img src={{action.gif_url}}>
+                        <div class="each-gesture">
+                            <h3>{{action.name}}</h3>
+                            <p class="description">{{action.description}}</p>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+    <style>
+        body {
+            background-color: rgb(245, 247, 247);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+        }
+
+        .all-action-cont {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .title {
+            background-color: rgb(244, 244, 145);
+            padding: 20px;
+            border-radius: 15px;
+            filter: drop-shadow(0 0 5px rgb(240, 240, 240));
+            margin-top: 20px;
+            border: solid 1px;
+        }
+
+        .title>h1 {
+            font-family: system-ui;
+            font-size: 35px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        .gesture-info-link {
+            text-decoration: none;
+            color: black;
+        }
+
+        .gesture-info-link:hover {
+            text-decoration: none;
+        }
+
+        .gesture-info-container {
+            max-width: 1200px;
+            background-color: white;
+            margin-top: 20px;
+            padding: 30px;
+            border-radius: 10px;
+            filter: drop-shadow(0 0 5px rgb(218, 218, 218));
+        }
+
+        .gesture-info-container>h5 {
+            font-size: 23px;
+            color: gray;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .gesture-info-container>p{
+            margin-left: 20px;
+            color: rgb(152, 152, 152);
+            font-weight: 600;
+            letter-spacing: 1px;
+            font-size: 18px;
+        }
+        .each-gesture-cont {
+            display: flex;
+            padding: 20px;
+            gap: 10px;
+            border: solid 2px black;
+            align-items: center;
+            border-radius: 10px;
+            margin-top: 20px;
+            max-height: 150px;
+        }
+        .each-gesture-cont:hover{
+            background-color: rgb(242, 244, 244);
+        }
+
+        .each-gesture-cont>img {
+            width: 150px;
+            border-radius: 10px;
+            padding: 5px;
+            border: solid 2px gray;
+        }
+
+        .each-gesture {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .each-gesture>p.description {
+            color:gray;
+            font-weight: 500;
+            letter-spacing: 1px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            margin: 0;
+            margin-left: 5px;
+        }
+        .mapped{
+            border-color: rgb(102, 240, 102);
+        }
+        img {
+            height: 100px;
+            width: 100px;
+        }
+    </style>
+{% endblock %}

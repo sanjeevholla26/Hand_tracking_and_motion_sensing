@@ -1,0 +1,126 @@
+{% extends './header_layout.html' %}
+{% load static %}
+{% block title %} Home {% endblock %}
+{% block body %}
+
+    <div class="app-name">
+        <H1>HANDYGLIDE</H1>
+        <h2>Hand Tracking and Virtual Mouse Application</h2>
+    </div>
+    <div class="description">
+        Welcome to HandyGlide, your gateway to seamless interaction with your devices!
+        <br>HandyGlide empowers users to control their computers effortlessly through hand gestures and experience a new era of intuitive computing with HandyGlide.
+    </div>
+    <div class="gallery">
+        <div class="image"><img src="https://cdn.pixabay.com/photo/2012/04/24/16/59/language-40437_1280.png" alt="Hand Gesture 1"></div>
+        <div class="image"><img src="https://cdn.pixabay.com/photo/2012/04/24/16/59/language-40438_640.png" alt="Hand Gesture 2"></div>
+        <div class="image"><img src="https://cdn.pixabay.com/photo/2012/04/24/16/59/sign-40441_640.png" alt="Hand Gesture 3"></div>
+        <div class="image"><img src="https://cdn.pixabay.com/photo/2016/04/01/10/42/cartoon-1299987_640.png" alt="Hand Gesture 4"></div>
+        <div class="image"><img src="https://cdn.pixabay.com/photo/2012/04/24/17/00/language-40443_640.png" alt="Hand Gesture 5"></div>
+        <div class="image"><img src="https://cdn.pixabay.com/photo/2016/04/01/08/27/alphabet-1298719_640.png" alt="Hand Gesture 6"></div>
+        <div class="image"><img src="https://cdn.pixabay.com/photo/2016/04/01/08/27/alphabet-1298716_1280.png" alt="Hand Gesture 7"></div>
+        <div class="image"><img src="https://cdn.pixabay.com/photo/2012/04/24/17/00/hand-40446_640.png" alt="Hand Gesture 8"></div>
+        <div class="image"><img src="https://cdn.pixabay.com/photo/2012/04/24/17/00/sign-40444_640.png" alt="Hand Gesture 9"></div>
+        <div class="image"><img src="https://cdn.pixabay.com/photo/2016/04/01/00/37/alphabet-1298302_640.png" alt="Hand Gesture 10"></div>
+        <div class="image"><img src="https://cdn.pixabay.com/photo/2016/04/01/08/27/alphabet-1298713_640.png" alt="Hand Gesture 11"></div>
+        <div class="image"><img src="https://cdn.pixabay.com/photo/2012/04/24/16/59/language-40439_640.png" alt="Hand Gesture 12"></div>
+        <div class="image"><img src="https://cdn.pixabay.com/photo/2012/04/24/17/00/hand-40445_960_720.png" alt="Hand Gesture 13"></div>
+        <div class="image"><img src="https://cdn.pixabay.com/photo/2012/04/24/17/01/hand-40447_1280.png" alt="Hand Gesture 14"></div>
+        <div class="image"><img src="https://cdn.pixabay.com/photo/2012/04/11/16/10/sign-language-28716_640.png" alt="Hand Gesture 15"></div>
+        <div class="image"><img src="https://cdn.pixabay.com/photo/2012/04/24/17/17/hand-40510_640.png" alt="Hand Gesture 16"></div>
+    </div>
+    
+    
+    <style>
+        body {
+            background: linear-gradient(270deg, #c766f3, #26d6d7);
+            background-size: 800% 800%;
+            color: white;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+            -webkit-animation: AnimationName 28s ease infinite;
+            -moz-animation: AnimationName 28s ease infinite;
+            animation: AnimationName 28s ease infinite;
+        }
+
+        @-webkit-keyframes AnimationName {
+            0%{background-position:0% 50%}
+            50%{background-position:100% 50%}
+            100%{background-position:0% 50%}
+        }
+        @-moz-keyframes AnimationName {
+            0%{background-position:0% 50%}
+            50%{background-position:100% 50%}
+            100%{background-position:0% 50%}
+        }
+        @keyframes AnimationName {
+            0%{background-position:0% 50%}
+            50%{background-position:100% 50%}
+            100%{background-position:0% 50%}
+        }
+
+        .app-name{
+            position: absolute;
+            top: 40%;
+            left: 5%;
+            padding-left: 15px;
+            border-left: solid 10px white;
+            max-width: 45%;
+        }
+        .description{
+            position: absolute;
+            top: 55%;
+            left: 5%;
+            padding-left: 15px;
+            font-size: 1.3rem;
+            max-width: 45%;
+        }
+        .gallery{
+            display: flex;
+            flex-wrap: wrap;
+            position: absolute;
+            top: 25%;
+            right: 5%;
+            padding-left: 15px;
+            max-width: 45%;
+        }
+        .image>img{
+            width: 200px;
+            height: 150px;
+            padding: 5px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+    </style>
+
+    <script>
+        // JavaScript code to swap images
+        const images = document.querySelectorAll('.image');
+
+        images.forEach(image => {
+            image.addEventListener('click', () => {
+                // Generate a random index within the range of images
+                const randomIndex = Math.floor(Math.random() * images.length);
+
+                // Swap positions with the randomly selected image
+                const temp = image.innerHTML;
+                image.innerHTML = images[randomIndex].innerHTML;
+                images[randomIndex].innerHTML = temp;
+
+                // Apply CSS animations to create a smooth transition effect
+                image.style.transition = "transform 0.5s ease";
+                images[randomIndex].style.transition = "transform 0.5s ease";
+
+                // Randomly generate rotation angles for the images
+                const rotateAngle1 = Math.random() * 20 - 10;
+                const rotateAngle2 = Math.random() * 20 - 10;
+
+                // Apply rotation to the images
+                image.style.transform = `rotate(${rotateAngle1}deg)`;
+                images[randomIndex].style.transform = `rotate(${rotateAngle2}deg)`;
+            });
+        });
+    </script>
+    
+{% endblock %}
+

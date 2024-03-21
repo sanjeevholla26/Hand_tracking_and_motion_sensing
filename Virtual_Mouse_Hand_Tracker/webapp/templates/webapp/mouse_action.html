@@ -1,0 +1,13 @@
+{% extends './header_layout.html' %}
+{% load static %}
+{% block title %} Mouse Action {% endblock %}
+{% block body %}
+    <h1>{{mouse_action.name}}</h1>
+    <p>{{mouse_action.description}}</p>
+    <h4>Gestures available for mapping</h4>
+    <ul>
+        {% for gesture in mouse_action.gesture_category.all %}
+            <li>{{gesture.name}}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
