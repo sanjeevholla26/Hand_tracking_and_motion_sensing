@@ -10,9 +10,11 @@ class category(models.Model):
         IndexAndThumbFinger = 3, 'Index and thumb finger'
         RingFingerUp = 4, 'Ring finger up'
         IndexAndLastFingerUp = 5, 'Index and last finger up'
-        AllFingersUp = 6, 'All fingers up'
         AllFingersDown = 7, 'All fingers closed'
-
+        IndexMiddleRingUp  = 8, 'Index, Middle and Ring finger up'
+        last_four_up = 9, 'Index, middle, ring, lase finger up'
+        four_fingers_open = 10, 'Thumb, index, middle and ring fingers up'
+        OnlyThumbFingerUp = 11, 'Thumb finger up'
     name = models.CharField(max_length=100, null=True, blank=True)
     category_id = models.IntegerField(choices=GestureActions.choices)
     image_url = models.URLField(null=True, blank=True)
@@ -27,8 +29,10 @@ class mouseAction(models.Model):
         MOUSE_LEFT_CLICK = 2, 'Mouse Left Click'
         MOUSE_RIGHT_CLICK = 3, 'Mouse Right Click'
         SCREENSHOT = 4, 'ScreenShot'
-        ZOOM_ACTIONS = 5, 'Zoom In and Zoom Out'
-        CLEAR = 6, 'Clear'
+        Zoom_In = 5, 'Zoom In'
+        Zoom_Out = 6, 'Zoom Out'
+        scrollup = 9, 'Scroll Up'
+        scrolldown = 10, 'Scroll Down'
 
     name = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)

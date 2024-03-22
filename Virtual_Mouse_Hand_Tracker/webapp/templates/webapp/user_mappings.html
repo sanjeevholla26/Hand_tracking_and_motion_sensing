@@ -2,6 +2,8 @@
 {% load static %}
 {% block title %} Mouse Action {% endblock %}
 {% block body %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <div class="user-mapping-cont">
         <div class="title">
             <h1>User Mappings</h1>
@@ -17,11 +19,19 @@
                     <div class="heading-right">
                         <h3>Gesture</h3>
                     </div>
+                    <div class="heading-delete">
+                        <h3>Delete</h3>
+                    </div>
                 </div>
                 {% for mapping in mappings %}
                     <div class="each-mapping">
                         <div class="left">{{mapping.mouse_action.name}}</div>
                         <div class="right">{{mapping.category.name}}</div>
+                        <form action="{% url 'delete_mapping' id=mapping.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" style="background: transparent; border: none;"><i class="material-icons" style="font-size:48px;color:red">delete</i>
+                            </button>
+                        </form>
                     </div>
                 {% endfor %}
             </div>
@@ -60,9 +70,9 @@
         }
         .btn-download {
             position: absolute;
-            top: 10px; 
-            right: 10px; 
-            z-index: 1; 
+            top: 10px;
+            right: 10px;
+            z-index: 1;
             margin-top: 7.25px;
             margin-right: 310px;
         }
@@ -81,6 +91,7 @@
             gap: 10px;
             max-width: fit-content;
             margin: auto;
+            align-items: center;
         }
         .left{
             width: 500px;
@@ -116,10 +127,25 @@
             border-radius: 20px;
             margin-bottom: 20px;
         }
+        .heading-delete{
+            width: 80px;
+            padding: 15px 10px;
+            background-color: rgb(69, 32, 69);
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
         .heading-left>h3{
             max-width: fit-content;
             margin: auto;
             color: white;
+        }
+        .heading-delete>h3{
+            max-width: fit-content;
+            margin: auto;
+            color: white;
+            font-size: 20px;
+            align-self: center;
+            margin-top: 5px;
         }
         .heading-right>h3{
             max-width: fit-content;
@@ -132,6 +158,6 @@
         .logout-btn {
             margin-right: 272.5px;
         }
-        
+
     </style>
 {% endblock %}

@@ -14,4 +14,5 @@ urlpatterns = [
     path("hand_gesture/<int:id>", views.hand_gesture, name="hand_gesture"),
     path("api/login", views.check_for_user),
     path('download/', views.DownloadZipFileView.as_view(), name='download_zip_file'),
+    path('delete/<int:id>', views.delete_mapping, name="delete_mapping"),
 ]

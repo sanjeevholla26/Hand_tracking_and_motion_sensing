@@ -101,7 +101,6 @@ def mouse_action_gesture_mapping(request, id):
         mapping = category_MouseAction_Mapping.get_mapping(mouse_action, request.user)
         user_selected_gestures = []
         user_selected_gestures = category_MouseAction_Mapping.get_all_gestures(request.user)
-        print("*************", user_selected_gestures)
         if mapping and user_selected_gestures:
             user_selected_gestures.remove(mapping.category.id)
         if request.method == "GET":
@@ -147,6 +146,26 @@ def all_gestures(request):
         })
     else:
         return HttpResponseRedirect(reverse(login_user))
+
+def delete_mapping(request, id):
+    if request.user.is_authenticated:
+        try:
+            mapping = category_MouseAction_Mapping.objects.get(id=id)
+            if mapping.user == request.user:
+                mapping.delete()  # Correct method to delete an object
+
+                # Redirect to user_mappings view after successful deletion
+                return HttpResponseRedirect(reverse('user_mappings'))
+            else:
+                # Redirect to home if the mapping does not belong to the authenticated user
+                return HttpResponseRedirect(reverse('home'))
+        except category_MouseAction_Mapping.DoesNotExist:
+            # Handle the case where the mapping with the given ID does not exist
+            return HttpResponseRedirect(reverse('user_mappings'))
+    else:
+        # Redirect to home if the user is not authenticated
+        return HttpResponseRedirect(reverse('home'))
+
 # Django view code
 @csrf_exempt
 def check_for_user(request):
