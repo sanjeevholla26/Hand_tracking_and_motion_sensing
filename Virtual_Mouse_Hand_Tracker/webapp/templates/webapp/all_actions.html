@@ -16,7 +16,12 @@
                     {% else %}
                         <div class="each-gesture-cont">
                     {% endif %}
-                        <img src={{action.gif_url}}>
+                    {% if action.name == 'Scroll Up' %}
+                        <img style="transform: scaleY(-1);" src="{{ action.gif_url }}">
+                    {% else %}
+                            <img src="{{ action.gif_url }}">
+                    {% endif %} 
+                
                         <div class="each-gesture">
                             <h3>{{action.name}}</h3>
                             <p class="description">{{action.description}}</p>
