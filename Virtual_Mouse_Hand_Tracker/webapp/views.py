@@ -12,6 +12,8 @@ from django.http import JsonResponse
 import json
 from django.views import View
 from django.utils.encoding import smart_str
+from django.http import HttpResponse
+
 import os
 
 # Create your views here.
@@ -166,6 +168,9 @@ def delete_mapping(request, id):
         # Redirect to home if the user is not authenticated
         return HttpResponseRedirect(reverse('home'))
 
+# def user_guide(request):
+
+
 # Django view code
 @csrf_exempt
 def check_for_user(request):
@@ -193,7 +198,7 @@ def check_for_user(request):
 class DownloadZipFileView(View):
     def get(self, request):
         # Path to your pre-existing zip file
-        zip_file_path = "/home/Downloads"
+        zip_file_path = "/home/sanjeev/Desktop/mouse_action.zip"
 
         # Open the file in binary mode
         with open(zip_file_path, 'rb') as zip_file:

@@ -8,8 +8,7 @@
         </div>
         <div class="mouse-action-body">
             <div class="mouse-action-body-content left">
-                <h2>Description</h2>
-                <p>{{mouse_action.description}}</p>
+                <img src={{mouse_action.gif_url}}>
             </div>
             <div class="mouse-action-body-content right">
                 <h2>Select Gesture</h2>
@@ -33,10 +32,14 @@
                 </form>
             </div>
         </div>
+        <div class="gesture-description">
+            <h3>Description</h3>
+            <p>{{mouse_action.description}}</p>
+        </div>
         <div class="gesture-info-container">
             <h5>Gestures Info</h5>
             {% for gesture in mouse_action.gesture_category.all %}
-            <a href="#" class="gesture-info-link">
+            <a href="{% url 'hand_gesture' id=gesture.id %}" class="gesture-info-link">
                 <div class="each-gesture-cont">
                     <img src={{gesture.image_url}}><div class="each-gesture"><h3>{{gesture.name}}</h3></div>
                 </div>
@@ -65,10 +68,32 @@
             font-weight: 700;
             letter-spacing: 2px;
         }
-        body{
-            background-color: rgb(245, 247, 247);
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        }
+        body {
+        background: linear-gradient(70deg, #f5f5f5, #e9e9e9, #bdbdbd);
+    background-size: 800% 800%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+    /* Adjust animation duration for faster color change */
+    -webkit-animation: AnimationName 10s ease infinite;
+    -moz-animation: AnimationName 10s ease infinite;
+    animation: AnimationName 10s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+    10%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
         .mouse-action-container{
             max-width: 1200px;
             margin: auto;
@@ -99,11 +124,6 @@
             border-radius: 10px;
             filter: drop-shadow(0 0 5px rgb(240, 240, 240));
         }
-
-        .left{
-            width: 650px;
-            background-color: rgb(244, 244, 145);
-        }
         .right{
             width: 530px;
         }
@@ -116,10 +136,14 @@
             border-bottom: solid 3px black;
             margin-bottom: 40px;
         }
-        .left>p{
-            font-size: 25px;
-            font-weight: 400;
-            letter-spacing: 1px;
+        .left{
+            background-color: rgb(165, 120, 217);
+        }
+        .left>img{
+            width: 625px;
+            height: 100%;
+            max-height: 570px;
+            border-radius: 10px;
         }
 
         .mapping-form{
@@ -188,6 +212,14 @@
             padding: 5px;
             border: solid 2px gray;
             height: 100px;
+        }
+        .gesture-description{
+            max-width: 1200px;
+            background-color: rgb(244, 244, 145);
+            margin-top: 20px;
+            padding: 30px;
+            border-radius: 10px;
+            filter: drop-shadow(0 0 5px rgb(218, 218, 218));
         }
     </style>
 {% endblock %}
