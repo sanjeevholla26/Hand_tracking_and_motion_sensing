@@ -168,8 +168,8 @@ def delete_mapping(request, id):
         # Redirect to home if the user is not authenticated
         return HttpResponseRedirect(reverse('home'))
 
-# def user_guide(request):
-
+def user_guide(request):
+    return render(request, "webapp/guide.html")
 
 # Django view code
 @csrf_exempt

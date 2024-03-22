@@ -15,4 +15,5 @@ urlpatterns = [
     path("api/login", views.check_for_user),
     path('download/', views.DownloadZipFileView.as_view(), name='download_zip_file'),
     path('delete/<int:id>', views.delete_mapping, name="delete_mapping"),
+    path("user_guide/", views.user_guide, name="user_guide"),
 ]

@@ -29,6 +29,7 @@
         </div>
         <div class="bottom-header">
             <div class="bottom-content">
+                <a href="{% url 'user_guide' %}"><button>User Guide</button></a>
                 <a href="{% url 'gestures' %}"><button>Gestures</button></a>
                 <a href="{% url 'all_actions' %}"><button>Actions</button></a>
                 {% if request.user.is_authenticated %}
