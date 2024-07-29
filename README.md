@@ -1,1 +1,1 @@
-# Hand_tracking_and_motion_sensing
+# Mouse actions based on hand gestures
